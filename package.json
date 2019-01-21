@@ -4,6 +4,7 @@
   "description": "chat app made on react using firebase for db",
   "main": "index.js",
   "dependencies": {
+    "firebase": "^5.8.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.3"
