@@ -6,8 +6,6 @@ import * as serviceWorker from './serviceWorker';
 
 // Firebase App is always required and must be first
 // var firebase = require("firebase/app");
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
 // Add additional services that you want to use
 // require("firebase/auth");
 // require("firebase/database");
@@ -18,23 +16,6 @@ import 'firebase/auth';
 // Comment out (or don't require) services that you don't want to use
 // require("firebase/storage");
 
-var config = {
-    apiKey: "AIzaSyCyFwexoUngNo92rHXrDZPhctCY6vmFkik",
-    authDomain: "reactchat-7902e.firebaseapp.com",
-    databaseURL: "https://reactchat-7902e.firebaseio.com",
-    projectId: "reactchat-7902e",
-    storageBucket: "reactchat-7902e.appspot.com",
-    messagingSenderId: "479296809558"
-  };
-firebase.initializeApp(config);
-firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      // User is signed in.
-      console.log("user is signed in ",user)
-    } else {
-      // No user is signed in.
-    }
-  });
 // firebase.auth().createUserWithEmailAndPassword('hello@abc.com','12345R')
 // .then(result=>console.log(result))
 // .catch(function(error) {
