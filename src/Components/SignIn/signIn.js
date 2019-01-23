@@ -1,13 +1,14 @@
 import React , {Component} from 'react';
-
+import { connect } from 'react-redux';
 class SignIn extends Component {
     render(){
         return(
             <div >
-                login page
+                <p>Sign in  </p>
             </div>
         )
     }
 }
 
-export default SignIn;
+const SignInRedux = connect()(SignIn)
+export default SignInRedux;

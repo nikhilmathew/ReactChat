@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import SignIn from '../SignIn/signIn'
-import Error from '../Error/Error'
 import fire from '../Config/fire'
 import './App.css';
-
+import Home from '../Home/home'
 class App extends Component {
   constructor(props){
     super(props)
@@ -19,7 +17,7 @@ class App extends Component {
   }
   authListener(){
     fire.auth().onAuthStateChanged((user) => {
-      if (user) {
+      if (!user) {
         // User is signed in.
         console.log("user is signed in ",user)
         this.setState({ user })
@@ -32,14 +30,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <BrowserRouter>
-          <Switch>
-            <Route path="/" component={SignIn} exact/>
-            <Route path="/login" component={SignIn} />
-            <Route path="/home" component={SignIn} />
-            <Route component={Error} />
-          </Switch>
-        </BrowserRouter>
+        {  this.state.user==null?<SignIn/>:<Home/>}
       </div>
     );
   }

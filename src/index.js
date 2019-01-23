@@ -3,7 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './Components/App/App';
 import * as serviceWorker from './serviceWorker';
-
+import  { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducers from './Components/App/reducers'
+const store = createStore(
+    reducers
+)
+// import reducer 
 // Firebase App is always required and must be first
 // var firebase = require("firebase/app");
 // Add additional services that you want to use
@@ -25,7 +31,11 @@ import * as serviceWorker from './serviceWorker';
 //     // ...
 //     console.log(error)
 //   });
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+<Provider store = { store }>
+    <App />
+</Provider>
+, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
