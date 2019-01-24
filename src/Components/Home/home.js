@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { logout } from '../../actions/authActions'
 
 class Home extends Component {
+  constructor(props){
+    super(props)
+    this.logout = this.logout.bind(this)
+  }
   render() {
     return (
       <div>
@@ -12,8 +18,10 @@ class Home extends Component {
   }
   logout(){
     console.log("logout")
-    
+    this.props.logout()
   }
 }
-const HomeRedux = connect()(Home)
-export default HomeRedux;
+Home.propTypes ={
+  logout: PropTypes.func.isRequired
+}
+export default connect(null, { logout })(Home)
