@@ -13,16 +13,19 @@ class App extends Component {
   }
 
   componentDidMount(){
+    console.log("app mounted")
     this.authListener()
   }
   authListener(){
+    // console.log(fire)
     fire.auth().onAuthStateChanged((user) => {
-      if (!user) {
+      if (user) {
         // User is signed in.
         console.log("user is signed in ",user)
         this.setState({ user })
       } else {
         // No user is signed in.
+        console.log("no user signed in")
         this.setState({ user:null })
       }
     });  
