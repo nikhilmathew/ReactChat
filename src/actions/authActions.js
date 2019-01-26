@@ -1,5 +1,7 @@
 import { SIGNIN, SIGNOUT, SIGNINGIN, NEWUSER, REGISTERING, REGISTER } from './types'
 import fire from '../Config/fire'
+// import { addUserToFireDBOnRegistration } from '../Config/fireMethods'
+
 export function silentLogin(user){
     return function(dispatch){
         dispatch({
@@ -80,6 +82,20 @@ export function registerUser(email,password,displayName){
                       }).then(function() {
                         // Update successful.
                         console.log("user name and pic updated",result,result.user)
+                        let { displayName, photoURL, email,uid }= fire.auth().currentUser
+                        fire.firestore().collection('users').doc(uid).set({
+                            name:displayName,
+                            email:email,
+                            photoURL:photoURL,
+                            uid:uid,
+                            created_at: new Date()
+                        })
+                        .then(result=>{
+                            console.log(" new user added to DB",result)
+                        })
+                        .catch(err=>{
+                            console.log("error adding new user to firestore",err)
+                        })
                             dispatch({
                                 type:REGISTER,
                                 payload:result.user
