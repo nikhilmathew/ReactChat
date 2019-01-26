@@ -1,19 +1,41 @@
-import { SIGNIN,SIGNOUT } from '../actions/types'
+import { SIGNIN,SIGNOUT, SIGNINGIN, NEWUSER, REGISTER,REGISTERING } from '../actions/types'
 
 const initialState = {
-    user: null
+    user: {},
+    newUser:false
 }
 export default function(state = initialState,action) {
     switch (action.type){
         case SIGNIN:
             return {
                 ...state,
-                user:action.payload
+                user:action.payload,
+                newUser:false
             }
         case SIGNOUT:
             return {
                 ...state,
                 user:null
+            }
+        case SIGNINGIN:
+            return{
+                ...state,
+                user:null,
+
+            }  
+        case NEWUSER:
+            return {
+                ...state,
+                newUser:true
+            }
+        case REGISTER:
+            return {
+                ...state,
+                user:action.payload
+            }
+        case REGISTERING:
+            return {
+                ...state,
             }
         default:
             return state;

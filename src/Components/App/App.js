@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { silentLogin } from '../../actions/authActions'
 // import logo from './logo.svg';
-import SignIn from '../SignIn/signIn'
 import fire from '../../Config/fire'
 import './App.css';
 import Home from '../Home/home'
+import AuthPages from '../AuthenticationPages/authPages';
 class App extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      user:{},
-    }
-  }
+  // constructor(props){
+  //   super(props)
+   
+  // }
 
-  componentDidMount(){
+  componentWillMount(){
     console.log("app mounted")
     this.authListener()
   }
@@ -21,22 +22,30 @@ class App extends Component {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in.
+        this.props.silentLogin(user)
         console.log("user is signed in ",user)
-        this.setState({ user })
       } else {
         // No user is signed in.
+        this.props.silentLogin(null)
         console.log("no user signed in")
-        this.setState({ user:null })
       }
     });  
   }
   render() {
     return (
       <div className="App">
-        {  this.state.user==null?<SignIn/>:<Home/>}
+        {  this.props.user==null?<AuthPages/>:<Home/>}
       </div>
     );
   }
 }
 
-export default App;
+App.propTypes ={
+  silentLogin: PropTypes.func.isRequired
+}
+function mapStateToProps (state){
+  return {
+    user: state.auth.user
+  }
+}
+export default  connect(mapStateToProps, { silentLogin })(App)

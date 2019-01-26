@@ -1,18 +1,17 @@
 import React , { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
-import { login, newUser } from '../../actions/authActions'
-
-class SignIn extends Component {
+import { registerUser } from '../../actions/authActions'
+class SignUp extends Component {
     constructor(props){
         super(props)
         this.state={
             email:'',
-            password:''
+            password:'',
+            name:''
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
-        this.newUser = this.newUser.bind(this)
     }
     onChange(e){
         e.preventDefault()
@@ -23,20 +22,23 @@ class SignIn extends Component {
     onSubmit(e){
         e.preventDefault()
         console.log("clicked sign in ")
-        this.props.login(this.state.email,this.state.password)
+        this.props.registerUser(this.state.email,this.state.password,this.state.name)
 
-    }
-    newUser(){
-        this.props.newUser()
-    }
-    componentWillMount(){
-        // this.props.login()
     }
     render(){
         return(
             <div >
-                <p>Sign in  </p>
+                <p>Sign Up  </p>
                 <form onSubmit={this.onSubmit}>
+                    <div>
+                        <label>Name </label>
+                        <input 
+                            type="text"
+                            name="name"
+                            onChange={this.onChange}
+                            value={this.state.name}
+                        />
+                    </div>
                     <div>
                         <label>Email </label>
                         <input 
@@ -58,17 +60,11 @@ class SignIn extends Component {
                     <br/>
                     <button type="submit" >Login</button>
                 </form>
-                <p>New User? <button onClick={this.newUser}>Sign Up</button></p>
             </div>
         )
     }
 }
-// const mapStateToProps = state => ({
-//     login:state.auth.user
-// })
-
-SignIn.propTypes ={
-    login: PropTypes.func.isRequired,
-    newUser: PropTypes.func.isRequired
+SignUp.propTypes ={
+    registerUser: PropTypes.func.isRequired,
 }
-export default connect(null, { login,newUser })(SignIn)
+export default connect(null, { registerUser })(SignUp)
