@@ -1,9 +1,10 @@
-import { UPDATE_ROOMS, FETCHING_ROOMS,SELECT_CHAT_ROOM, GET_INVITES,FETCHING_INVITES, DELETE_INVITE,CLEAN_CHAT_REDUCER } from '../actions/types'
-
+import { UPDATE_ROOMS, FETCHING_ROOMS,SELECT_CHAT_ROOM, GET_INVITES,FETCHING_INVITES, DELETE_INVITE,CLEAN_CHAT_REDUCER, UPDATE_MESSAGES } from '../actions/types'
+import { fetchMessages } from '../actions/chatlistActions'
 const initialState = {
     chatRooms : [],
     currentlySelectedRoom:null,
-    invitedRooms:[]
+    invitedRooms:[],
+    messageCache:null
 }
 export default function(state = initialState,action) {
     switch (action.type){
@@ -12,7 +13,8 @@ export default function(state = initialState,action) {
                 ...state,
                 chatRooms:[],
                 currentlySelectedRoom:null,
-                invitedRooms:[]
+                invitedRooms:[],
+                messageCache:[]
             }
         case FETCHING_ROOMS:
             return {
@@ -29,9 +31,25 @@ export default function(state = initialState,action) {
                 } 
             return state;
         case SELECT_CHAT_ROOM:
-                return {
+                if(state.currentlySelectedRoom!==null){
+                    // fetchMessages(action.payload,false)
+                    return {
+                        ...state,
+                        currentlySelectedRoom:state.chatRooms.find(room => room.id ===action.payload),
+                        messageCache:null
+                    }
+                }else{
+                    // fetchMessages(action.payload,true)
+                    return {
+                        ...state,
+                        currentlySelectedRoom:state.chatRooms.find(room => room.id ===action.payload),
+                        messageCache:null
+                    }
+                }
+        case UPDATE_MESSAGES:
+                return{
                     ...state,
-                    currentlySelectedRoom:state.chatRooms.find(room => room.id ===action.payload)
+                    messageCache:action.payload
                 }
         case FETCHING_INVITES:
                 return state

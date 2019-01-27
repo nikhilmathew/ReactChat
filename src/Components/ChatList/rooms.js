@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { selectChatRoom } from '../../actions/chatlistActions'
+import { selectChatRoom,fetchMessages } from '../../actions/chatlistActions'
 import  './rooms.scss'
 class Rooms extends Component {
     constructor(props){
@@ -10,6 +10,7 @@ class Rooms extends Component {
     }
     selectChatroom(e){
         console.log(e.target.id)
+        this.props.fetchMessages(e.target.id,true)
         this.props.selectChatRoom(e.target.id)
     }
     componentDidUpdate(){
@@ -41,11 +42,12 @@ class Rooms extends Component {
   
 }
 Rooms.propTypes ={
-    selectChatRoom :PropTypes.func.isRequired
+    selectChatRoom :PropTypes.func.isRequired,
+    fetchMessages:PropTypes.func.isRequired
 }
 function mapStateToProps (state){
   return {
       rooms:state.chatList.chatRooms
   }
 }
-export default connect(mapStateToProps, { selectChatRoom  })(Rooms)
+export default connect(mapStateToProps, { selectChatRoom ,fetchMessages })(Rooms)

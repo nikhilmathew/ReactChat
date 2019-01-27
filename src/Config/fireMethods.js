@@ -73,3 +73,26 @@ export function acceptInvite(chatroomid){
             members: firebase.firestore.FieldValue.arrayUnion({name:user.displayName,id:user.uid,photoURL:user.photoURL})
         })
 }
+export function deleteUser(room_id,user_id){
+    console.log("user deletion reeived",room_id,user_id)
+    fire.firestore().collection('chatrooms').doc(room_id).get()
+    .then(result=>{
+        let rdata =result.data()
+        console.log(rdata.members)
+        fire.firestore().collection('chatrooms').doc(room_id).update({
+            members: rdata.members.filter(member => member.id !== user_id)
+        })
+        fire.firestore().collection('users').doc(user_id).update({
+            chatrooms: firebase.firestore.FieldValue.arrayRemove(room_id)
+        })
+    })
+    
+}
+export function sendMessage(room_id,message){
+    fire.firestore().collection('chatrooms').doc(room_id).collection('messages').add({
+        sender:fire.auth().currentUser.displayName,
+        sender_id:fire.auth().currentUser.uid,
+        message:message,
+        created_at: new Date()
+    })
+}
