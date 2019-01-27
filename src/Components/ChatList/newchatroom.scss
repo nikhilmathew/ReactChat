@@ -1,0 +1,30 @@
+.create_room_button_container{
+    // border:1px solid red;
+    height:60px;
+    button{
+        width:80%;
+        margin:5px;
+        margin-right:auto;
+        margin-left:auto;
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius:7px;
+        background-color:orange;
+
+    }
+
+}
+.create_room_input_container{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    border:1px solid red;
+    height: 60px;
+   button{
+       border:none;
+       background-color:orange;
+   }
+}

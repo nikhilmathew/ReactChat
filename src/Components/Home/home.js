@@ -34,7 +34,7 @@ class Home extends Component {
             <button className="logout_button btn" onClick={this.logout} >Logout </button>
           </div>
        </div>
-       <div className="row">
+       <div className="row components">
           <div className="col-4">
             <ChatList />
           </div>

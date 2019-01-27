@@ -1,3 +1,6 @@
 .chat_list_container{
     border:1px solid red;
+    display:flex;
+    // flex-grow: 1;
+    height:100%;
 }
