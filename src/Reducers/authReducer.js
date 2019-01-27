@@ -14,7 +14,7 @@ export default function(state = initialState,action) {
             }
         case SIGNOUT:
             return {
-                ...state,
+                newUser:false,
                 user:null
             }
         case SIGNINGIN:

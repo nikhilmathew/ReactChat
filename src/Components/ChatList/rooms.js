@@ -18,6 +18,7 @@ class Rooms extends Component {
   render() {
     return (
         <div className="row ">
+        <p>Joined Chat Rooms</p>
             <div className="col-12">
                 <div className="row joined_rooms_container">
                     <div className="col-12">

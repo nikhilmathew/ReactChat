@@ -1,5 +1,6 @@
 import fire from './fire'
 import * as firebase from 'firebase';
+import { getInvites } from '../actions/chatlistActions';
 
 export function addUserToFireDBOnRegistration(){
     console.log("sending data to firestore")
@@ -54,4 +55,21 @@ export function sendInvite(email,chatroom){
     {
         merge:true
     })
+}
+export function rejectInvite(id){
+    fire.firestore().collection('invites').doc(fire.auth().currentUser.email).update({
+        rooms:firebase.firestore.FieldValue.arrayRemove(id)
+    })
+    .then(()=>{
+        getInvites()
+    })
+}
+export function acceptInvite(chatroomid){
+        let user  = fire.auth().currentUser
+        fire.firestore().collection('users').doc(user.uid).update({
+            chatrooms: firebase.firestore.FieldValue.arrayUnion(chatroomid)
+        })
+        fire.firestore().collection('chatrooms').doc(chatroomid).update({
+            members: firebase.firestore.FieldValue.arrayUnion({name:user.displayName,id:user.uid,photoURL:user.photoURL})
+        })
 }

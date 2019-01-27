@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { logout } from '../../actions/authActions'
-import { fetchRooms } from '../../actions/chatlistActions'
+import { fetchRooms,getInvites,cleanStateOnleaveHome } from '../../actions/chatlistActions'
 import ChatList from '../ChatList/chatList'
 import  './home.scss'
 import ChatWindow from '../ChatWindow/chatWindow'
@@ -17,6 +17,11 @@ class Home extends Component {
   componentDidUpdate(){
     console.log("home updated")
     this.props.fetchRooms()
+    this.props.getInvites()
+  }
+  componentWillUnmount(){
+    this.props.cleanStateOnleaveHome()
+    console.log('***************************************************************************')
   }
   render() {
     return (
@@ -51,11 +56,14 @@ class Home extends Component {
 }
 Home.propTypes ={
   logout: PropTypes.func.isRequired,
-  fetchRooms: PropTypes.func.isRequired
+  fetchRooms: PropTypes.func.isRequired,
+  getInvites: PropTypes.func.isRequired,
+  cleanStateOnleaveHome:PropTypes.func.isRequired
+
 }
 function mapStateToProps (state){
   return {
     user: state.auth.user
   }
 }
-export default connect(mapStateToProps, { logout,fetchRooms })(Home)
+export default connect(mapStateToProps, { logout,fetchRooms, getInvites,cleanStateOnleaveHome })(Home)
