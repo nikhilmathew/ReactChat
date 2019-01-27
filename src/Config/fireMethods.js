@@ -32,11 +32,26 @@ export function createChatRoom(name){
     .then(res=>{
         console.log(res)
         let chatroomid = res.id
-        fire.firestore().collection('users').doc(fire.auth().currentUser.uid).update({
+        let user  = fire.auth().currentUser
+        fire.firestore().collection('users').doc(user.uid).update({
             chatrooms: firebase.firestore.FieldValue.arrayUnion(chatroomid)
+        })
+        fire.firestore().collection('chatrooms').doc(chatroomid).update({
+            id:chatroomid
+        })
+        fire.firestore().collection('chatrooms').doc(chatroomid).update({
+            members: firebase.firestore.FieldValue.arrayUnion({name:user.displayName,id:user.uid,photoURL:user.photoURL})
         })
     })
     .catch(err=>{
         console.error(err)
+    })
+}
+export function sendInvite(email,chatroom){
+    fire.firestore().collection('invites').doc(email).set({
+        rooms: firebase.firestore.FieldValue.arrayUnion(chatroom)
+    },
+    {
+        merge:true
     })
 }

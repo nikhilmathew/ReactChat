@@ -2,13 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { logout } from '../../actions/authActions'
+import { fetchRooms } from '../../actions/chatlistActions'
 import ChatList from '../ChatList/chatList'
 import  './home.scss'
+import ChatWindow from '../ChatWindow/chatWindow'
+import ChatDetails from '../ChatDetails/chatdetails'
+
 class Home extends Component {
   constructor(props){
     super(props)
     console.log(this.props)
     this.logout = this.logout.bind(this)
+  }
+  componentDidUpdate(){
+    console.log("home updated")
+    this.props.fetchRooms()
   }
   render() {
     return (
@@ -26,10 +34,10 @@ class Home extends Component {
             <ChatList />
           </div>
           <div className="col-5">
-
+            <ChatWindow />
           </div>
           <div className="col-3">
-
+            <ChatDetails/>
           </div>
        </div>
       
@@ -42,11 +50,12 @@ class Home extends Component {
   }
 }
 Home.propTypes ={
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  fetchRooms: PropTypes.func.isRequired
 }
 function mapStateToProps (state){
   return {
     user: state.auth.user
   }
 }
-export default connect(mapStateToProps, { logout })(Home)
+export default connect(mapStateToProps, { logout,fetchRooms })(Home)

@@ -41,22 +41,25 @@ class NewChatRoom extends Component {
   render() {
     return (
     <div className="row " >
-         <div className="row create_room_button_container">
-            <button className="show_room_input" onClick={this.showRoomInput}>Create a New Room</button>
-         </div>
-         { this.state.showInput?<div className="row create_room_input_container">
-            <div className="col-8">
+      <div className="col-12">
+        <div className="row create_room_button_container">
+              <button className="show_room_input" onClick={this.showRoomInput}>Create a New Room</button>
+        </div>
+        { this.state.showInput?
+        <div className="row create_room_input_container">
+          <div className="col-8">
             <input type = "text" className="room_name" placeholder="enter a name for the chat room" name="chat_room" value={this.state.newRoomName} onChange={this.updateNewRoomName} />
-            </div>
-            <div className="col-2 cancel_button_container">
+          </div>
+          <div className="col-2 cancel_button_container">
             <button className="cancel_creation" onClick={this.hideRoomInput}>X</button>
-            </div>
-            <div className="col-2 create_button_container">
+          </div>
+          <div className="col-2 create_button_container">
             <button className="creat_room" onClick={this.createChatRoom}>Create</button>
-            </div>
-         </div>:null}
+          </div>
+        </div>
+        :null}
+      </div>
     </div>
-       
     );
   }
   
