@@ -1,4 +1,4 @@
-.room_list_joined{
+.invites_box{
     background: rgb(249,167,104); /* Old browsers */
     background: -moz-linear-gradient(-45deg, rgba(249,167,104,1) 0%, rgba(247,164,49,1) 51%, rgba(247,148,0,1) 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(-45deg, rgba(249,167,104,1) 0%,rgba(247,164,49,1) 51%,rgba(247,148,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -13,7 +13,7 @@
         width:100%;
     }
 }
-.room{
+.invite_room{
     padding:5px;
     margin-bottom:5px;
     margin-left:5px;
@@ -22,22 +22,18 @@
     border-top:2px solid grey;
     border-bottom:2px solid grey;
 }
-.selected_room{
-    border-top:3px solid green;
-    border-bottom:3px solid green;
-    // border-color:green;
-    
-    div{
-        .select_room{
-            background-color:lightgreen;
-        }
-    }
+.accept_invite,.reject_invite{
+    width:100%;
+    background-color:grey;
+    border:none;
+    border-radius:10px;
+    margin:1px;
 }
-.select_room{
-        width:100%;
-        background-color:grey;
-        border:none;
-        border-radius:10px;
-        margin:1px;
-    
+.accept_invite{
+    border-bottom:1px solid green;
+    background-color:lightgreen;
+}
+.reject_invite{
+    border-top:1px solid red;
+    background-color: lightcoral;
 }

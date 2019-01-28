@@ -7,7 +7,7 @@
         margin-right:auto;
         margin-left:auto;
         border: none;
-        color: white;
+        color: black;
         text-align: center;
         text-decoration: none;
         border-radius:7px;
@@ -21,10 +21,31 @@
     flex-direction:row;
     align-items:center;
     justify-content:center;
-    border:1px solid red;
+    // border:1px solid red;
     height: 60px;
-   button{
-       border:none;
-       background-color:orange;
+    width: 90%;
+    margin-left: auto!important;
+    margin-right: auto!important;
+    border: 1px solid orange;
+    background-color: orange;
+    border-radius: 10px;
+    img{
+        width:30px;
+    }
+   div{
+       padding:0 5px!important;
+   }
+   .room_name{
+       width:100%;
+       background-color:rgba(0, 0, 0, 0);
+    color:#000;
+    border: none;
+    outline:none;
+    height:30px;
+    transition:height 1s;
+    -webkit-transition:height 1s;
+   }
+   .create_button_container,.cancel_button_container{
+       padding:0 5px!important;
    }
 }

@@ -7,6 +7,11 @@ import fire from '../../Config/fire'
 import './App.css';
 import Home from '../Home/home'
 import AuthPages from '../AuthenticationPages/authPages';
+import { library } from '@fortawesome/fontawesome-svg-core'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBan, } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faBan)
 class App extends Component {
   // constructor(props){
   //   super(props)
@@ -23,7 +28,7 @@ class App extends Component {
       if (user) {
         // User is signed in.
         this.props.silentLogin(user)
-        console.log("user is signed in ",user)
+        console.log("auto signin user is signed in ",user)
       } else {
         // No user is signed in.
         this.props.silentLogin(null)

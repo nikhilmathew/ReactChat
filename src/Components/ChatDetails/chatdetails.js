@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { sendInvite } from '../../Config/fireMethods'
+import { sendInvite, deleteRoom } from '../../Config/fireMethods'
 import { kickUserFromChat } from '../../actions/chatlistActions'
 import PropTypes from 'prop-types'
 class ChatDetails extends Component {
@@ -27,7 +27,8 @@ class ChatDetails extends Component {
     this.props.kickUserFromChat(this.props.selectedRoom.id,e.target.id)
   }
   deleteRoom(){
-
+    console.log("delete room")
+    deleteRoom(this.props.selectedRoom)
   }
   render() {
     return (
@@ -43,6 +44,7 @@ class ChatDetails extends Component {
                 <div className="row">
                     Created at {  JSON.stringify(new Date(this.props.selectedRoom.created_at.toDate()).toLocaleString()) }
                 </div>
+                {this.props.selectedRoom.owner===this.props.user.uid?
                 <div className="row">
                     <p> Add a user to chatroom - </p>
                     <div className="newuser_email" >
@@ -50,6 +52,7 @@ class ChatDetails extends Component {
                         <button onClick={this.memberAdd}>Send Invite </button> 
                     </div>
                 </div>
+                :''}
                 <div className="row">
                     <div className="col-12 members_containers">
                         {

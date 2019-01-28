@@ -96,3 +96,12 @@ export function sendMessage(room_id,message){
         created_at: new Date()
     })
 }
+export function deleteRoom(roomobj){
+    console.log(roomobj)
+    roomobj.members.forEach(element => {
+        fire.firestore().collection('users').doc(element.id).update({
+            chatrooms:firebase.firestore.FieldValue.arrayRemove(roomobj.id)
+        })
+    });
+    fire.firestore().collection('chatrooms').doc(roomobj.id).delete()
+}

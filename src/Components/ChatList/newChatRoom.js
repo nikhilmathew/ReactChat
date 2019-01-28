@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 // import PropTypes from 'prop-types'
 import  './newchatroom.scss'
 import { createChatRoom } from '../../Config/fireMethods'
@@ -36,7 +38,13 @@ class NewChatRoom extends Component {
   }
   createChatRoom(){
       // call action here
-      createChatRoom(this.state.newRoomName)
+      let name = this.state.newRoomName.trim()
+      if(name!=='')
+        createChatRoom(this.state.newRoomName)
+      this.setState({
+        showInput:false,
+        newRoomName:''
+    })
   }
   render() {
     return (
@@ -48,13 +56,13 @@ class NewChatRoom extends Component {
         { this.state.showInput?
         <div className="row create_room_input_container">
           <div className="col-8">
-            <input type = "text" className="room_name" placeholder="enter a name for the chat room" name="chat_room" value={this.state.newRoomName} onChange={this.updateNewRoomName} />
+            <input type = "text" className="room_name" autocomplete="off" placeholder="enter a name for the chat room" name="chat_room" value={this.state.newRoomName} onChange={this.updateNewRoomName} />
           </div>
-          <div className="col-2 cancel_button_container">
-            <button className="cancel_creation" onClick={this.hideRoomInput}>X</button>
+          <div className="col-1 cancel_button_container">
+            <img className="cancel_creation" onClick={this.hideRoomInput} src="https://firebasestorage.googleapis.com/v0/b/reactchat-7902e.appspot.com/o/iconfinder_ban_1608568.png?alt=media&token=a81b998a-6142-486b-8a9e-687511b28504"/>
           </div>
-          <div className="col-2 create_button_container">
-            <button className="creat_room" onClick={this.createChatRoom}>Create</button>
+          <div className="col-1 offset-1 create_button_container">
+            <img className="creat_room" onClick={this.createChatRoom} src="https://firebasestorage.googleapis.com/v0/b/reactchat-7902e.appspot.com/o/iconfinder_Dialog-Apply-64_55520.png?alt=media&token=07174ff3-a4ff-40bf-9c30-913e05e7d910"/>
           </div>
         </div>
         :null}

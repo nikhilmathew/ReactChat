@@ -1,6 +1,7 @@
 import { UPDATE_ROOMS, FETCHING_ROOMS,SELECT_CHAT_ROOM, GET_INVITES,FETCHING_INVITES, DELETE_INVITE,CLEAN_CHAT_REDUCER, UPDATE_MESSAGES } from '../actions/types'
 import { fetchMessages } from '../actions/chatlistActions'
 const initialState = {
+    
     chatRooms : [],
     currentlySelectedRoom:null,
     invitedRooms:[],
@@ -23,13 +24,11 @@ export default function(state = initialState,action) {
         case UPDATE_ROOMS:
             if(action.payload === null)
                 return state
-            let index = state.chatRooms.findIndex(el => el.id === action.payload.id);
-            if(index === -1)
+            else
                 return  {
                     ...state,
-                    chatRooms:[...state.chatRooms, action.payload]
+                    chatRooms:action.payload//[...state.chatRooms, action.payload]
                 } 
-            return state;
         case SELECT_CHAT_ROOM:
                 if(state.currentlySelectedRoom!==null){
                     // fetchMessages(action.payload,false)
