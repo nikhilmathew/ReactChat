@@ -21,6 +21,7 @@
     border-radius:10px;
     border-top:2px solid grey;
     border-bottom:2px solid grey;
+
 }
 .selected_room{
     border-top:3px solid green;
@@ -32,6 +33,9 @@
             background-color:lightgreen;
         }
     }
+}
+.no-padding{
+    padding:0!important;
 }
 .select_room{
         width:100%;

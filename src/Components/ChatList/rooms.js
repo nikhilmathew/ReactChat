@@ -31,10 +31,10 @@ class Rooms extends Component {
                     <div className="col-12">
                         {this.props.rooms!=null?this.props.rooms.map(room =>(
                              <div className={`row room  ${this.state.selected===room.id?"selected_room":''}`} key={room.created_at}>
-                                <div className="col-9">
+                                <div className="col-8">
                                     {room.roomName}
                                 </div>
-                                <div className="col-3">
+                                <div className="col-4 no-padding">
                                     <button className='select_room '  id={room.id} onClick={this.selectChatroom}>{this.state.selected===room.id?"Active->":'Enter'}</button>
                                 </div>
                             </div>

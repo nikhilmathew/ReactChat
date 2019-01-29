@@ -5,7 +5,8 @@ import './chatwindow.scss'
 // import PropTypes from 'prop-types'
 class ChatWindow extends Component {
     state={
-        text:''
+        text:'',
+        hendlerSet:false
     }
     constructor(props){
         super(props)
@@ -13,14 +14,48 @@ class ChatWindow extends Component {
     this.typing = this.typing.bind(this)
     this.send = this.send.bind(this)
     }
+    
     typing(e){
         this.setState({
             text:e.target.value
         })
+        if(!this.state.handlerSet){
+            this.setState({
+                handlerSet:true
+            })
+            var input = document.getElementById("chat_text")
+            // Execute a function when the user releases a key on the keyboard
+            input.addEventListener("keyup", (event) =>{
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Number 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                // Trigger the button element with a click
+                this.send()
+            }
+            })
+        }
+        
+    }
+    componentWillUnmount(){
+        var input = document.getElementById("chat_text")
+            // Execute a function when the user releases a key on the keyboard
+            input.removeEventListener("keyup", (event) =>{
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Number 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                // Trigger the button element with a click
+                this.send()
+            }
+            })
     }
     send(){
+        document.getElementById("chat_text").focus();
         console.log("sending message")
-        sendMessage(this.props.selectedRoom.id,this.state.text)
+        let message = this.state.text.trim()
+        if(message!=='')
+            sendMessage(this.props.selectedRoom.id,this.state.text)
         this.setState({
             text:''
         })
@@ -36,7 +71,7 @@ class ChatWindow extends Component {
        {this.props.selectedRoom!=null? 
          <div className="col-12 sub_container">
                 <div className="row room_title">
-                    ROOM TITLE {this.props.selectedRoom!=null? this.props.selectedRoom.roomName:''}
+                    <p>{this.props.selectedRoom!=null? this.props.selectedRoom.roomName:''}</p>
                 </div>
                 <div className="row message_top_level_container" id="message_top_level_container">
                     <div className="message_container">
@@ -59,7 +94,7 @@ class ChatWindow extends Component {
                     
                 </div>
                 <div className="input_box">
-                    <input type="text" name="chat_text" onChange={this.typing} value={this.state.text} />
+                    <input type="text" name="chat_text" className="chat_text" id="chat_text" onChange={this.typing} value={this.state.text} />
                     <button className="send_message" onClick={this.send} >SEND</button>
                 </div>
          </div>
