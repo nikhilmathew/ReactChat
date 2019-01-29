@@ -21,12 +21,20 @@
     flex-direction: column;
     align-items:center;
     justify-content: center;
+    .profilepic{
+        width:50px;
+        border-radius: 100%;
+        position: absolute;
+        left: 10px;
+        border: 2px solid darkorange;        
+    }
     .title{
         // border:1px solid red;
         font-weight:700;
+        
         p{
             // border:1px solid red;
-
+            
         }
         
     }

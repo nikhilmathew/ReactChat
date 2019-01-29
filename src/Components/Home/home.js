@@ -15,18 +15,12 @@ class Home extends Component {
     this.logout = this.logout.bind(this)
   }
   componentDidMount(){
-    console.log("home mounted")
+    console.log("home mounted",this.props.user)
     setTimeout(()=>{
       this.props.fetchRooms()
       this.props.getInvites()
     },2000)
     
-  }
-  componentDidUpdate(){
-    console.log("home updated")
-    this.props.fetchRooms()
-    this.props.getInvites()
-  
   }
   componentDidUpdate(){
     console.log("home updated")
@@ -45,6 +39,7 @@ class Home extends Component {
       <div className="container-fluid">
        <div className="row" >
           <div className="title_bar_container">
+          <img className="profilepic" src={this.props.user.photoURL}/>
             <div className="title">
               <p>Welcome to Nik CHat ,  {this.props.user.displayName}  </p>
             </div>

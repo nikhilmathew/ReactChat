@@ -1,0 +1,136 @@
+.chat_room_title{
+    height: 50px;
+    border: 1px solid darkorange;
+    background-color: orange;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    p{
+        margin-left:auto;
+        margin-right:auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 25px;
+        line-height: 25px;
+        text-transform: uppercase;        
+    }
+}
+.owner_details{
+    height: 50px;
+    border: 1px solid darkorange;
+    // background-color: orange;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    p{
+        margin-left:auto;
+        margin-right:auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 25px;
+        line-height: 25px;
+        // text-transform: uppercase;        
+    }
+}
+.delete_details{
+    .delete_room{
+        margin:0;
+        padding:0;
+        .delete_chat_button{
+            width:100%;
+            height:30px;
+            border:none;
+            border:1px solid black;
+            border-radius: 10px;
+            background-color:darkorange;
+
+        }
+    }
+}
+.created_details{
+    height: 100px;
+    border: 1px solid darkorange;
+    // background-color: orange;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    p{
+        margin-left:auto;
+        margin-right:auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 20px;
+        line-height: 20px;
+        // text-transform: uppercase;        
+    }
+}
+.add_user_to_room{
+    height: 150px;
+    border: 1px solid darkorange;
+    // background-color: orange;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    p{
+        margin-left:auto;
+        margin-right:auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 20px;
+        line-height: 20px;
+        // text-transform: uppercase;        
+    }
+}
+.invite_email_name{
+    background-color:darkorange;
+    color:#000;
+    border: none;
+    border:1px solid black;
+    
+    border-radius: 10px;
+    outline:none;
+    // padding-left:5px;
+    margin:5px;
+    height:30px;
+    transition:height 1s;
+    -webkit-transition:height 1s;
+}
+.invite_send{
+    height:30px;
+    border:none;
+    border:1px solid black;
+    border-radius: 10px;
+    background-color:darkorange;
+}
+.members_containers{
+    border: 1px solid darkorange;
+    // background-color: orange;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;    
+    .member_item{
+        margin-top:4px;
+        margin-bottom:4px;
+        border-bottom:1px solid darkorange;
+        border-radius:10px;
+        .member_name{
+            width:100%;
+            font-size:14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .remove_member{
+            height:25px;
+            border:none;
+            border:1px solid black;
+            border-radius: 10px;
+            background-color:darkorange;
+        }
+    }
+}

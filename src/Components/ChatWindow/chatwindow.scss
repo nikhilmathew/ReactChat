@@ -63,7 +63,8 @@
             margin-bottom: 5px;
             font-size: 25px;
             line-height: 25px;
-            text-transform: uppercase;        }
+            text-transform: uppercase; 
+        }
     }
     .message_top_level_container{
         // overflow-y: scroll;
@@ -86,11 +87,19 @@
             text-overflow: ellipsis;
             overflow-wrap: break-word;
             max-width:95%;
+            img{
+                width:25px;
+                border:1px solid orange;
+                border-radius:100%;
+            }
         }
         .me{
             place-self:flex-end!important;
             border-radius: 10px 10px 0px 10px;
             border: 1px solid orange;
+            img{
+                display:none!important;
+            }
         }
     }
 }

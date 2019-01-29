@@ -64,7 +64,7 @@ export function newUser(){
         })
     }
 }
-export function registerUser(email,password,displayName){
+export function registerUser(email,password,displayName,image){
     return function(dispatch){
         dispatch(
             {
@@ -76,33 +76,49 @@ export function registerUser(email,password,displayName){
         return fire.auth().createUserWithEmailAndPassword(email, password)
                 .then(result=>{
                     console.log(result)
-                    result.user.updateProfile({
-                        displayName: displayName,
-                        photoURL: "https://cdn4.iconfinder.com/data/icons/evil-icons-user-interface/64/avatar-512.png"
-                      }).then(function() {
-                        // Update successful.
-                        console.log("user name and pic updated",result,result.user)
-                        let { displayName, photoURL, email,uid }= fire.auth().currentUser
-                        fire.firestore().collection('users').doc(uid).set({
-                            name:displayName,
-                            email:email,
-                            photoURL:photoURL,
-                            uid:uid,
-                            created_at: new Date()
+                    let storageRef = fire.storage().ref(result.user.uid)
+                    console.log(storageRef)
+                    storageRef.put(image)
+                    .then((storres)=>{
+                        console.log(storres)
+                        storageRef.getDownloadURL()
+                        .then(downloadref=>{
+                            console.log(downloadref)
+                                result.user.updateProfile({
+                                displayName: displayName,
+                                photoURL: downloadref
+                                }).then(()=> {
+                                // Update successful.
+                                console.log("user name and pic updated",result,result.user)
+                                let { displayName, photoURL, email,uid }= fire.auth().currentUser
+                                fire.firestore().collection('users').doc(uid).set({
+                                    name:displayName,
+                                    email:email,
+                                    photoURL:photoURL,
+                                    uid:uid,
+                                    created_at: new Date(),
+                                    chatrooms:[]
+                                })
+                                .then(result=>{
+                                    console.log(" new user added to DB",result)
+                                })
+                                .catch(err=>{
+                                    console.log("error adding new user to firestore",err)
+                                })
+                                    dispatch({
+                                        type:REGISTER,
+                                        payload:result.user
+                                    })
+                            }).catch(function(error) {
+                                // An error happened.
+                            });
                         })
-                        .then(result=>{
-                            console.log(" new user added to DB",result)
-                        })
-                        .catch(err=>{
-                            console.log("error adding new user to firestore",err)
-                        })
-                            dispatch({
-                                type:REGISTER,
-                                payload:result.user
-                            })
-                      }).catch(function(error) {
-                        // An error happened.
-                      });
+                        
+                    })
+                    .catch(err=>{
+                        console.log(err)
+                    })
+                    
                     
                 })
                 .catch(function(error) {

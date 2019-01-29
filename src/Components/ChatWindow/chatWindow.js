@@ -13,6 +13,7 @@ class ChatWindow extends Component {
 
     this.typing = this.typing.bind(this)
     this.send = this.send.bind(this)
+    this.findUserImage = this.findUserImage.bind(this)
     }
     
     typing(e){
@@ -38,17 +39,17 @@ class ChatWindow extends Component {
         
     }
     componentWillUnmount(){
-        var input = document.getElementById("chat_text")
-            // Execute a function when the user releases a key on the keyboard
-            input.removeEventListener("keyup", (event) =>{
-            // Cancel the default action, if needed
-            event.preventDefault();
-            // Number 13 is the "Enter" key on the keyboard
-            if (event.keyCode === 13) {
-                // Trigger the button element with a click
-                this.send()
-            }
-            })
+        // var input = document.getElementById("chat_text")
+        //     // Execute a function when the user releases a key on the keyboard
+        //     input.removeEventListener("keyup", (event) =>{
+        //     // Cancel the default action, if needed
+        //     event.preventDefault();
+        //     // Number 13 is the "Enter" key on the keyboard
+        //     if (event.keyCode === 13) {
+        //         // Trigger the button element with a click
+        //         this.send()
+        //     }
+        //     })
     }
     send(){
         document.getElementById("chat_text").focus();
@@ -65,6 +66,9 @@ class ChatWindow extends Component {
         if(box)
             box.scrollTop = box.scrollHeight
     }
+    findUserImage(id){
+        return this.props.selectedRoom.members.find((member)=> member.id===id).photoURL
+    }
   render() {
     return (
        <div className="row chat_list_container" >
@@ -79,7 +83,7 @@ class ChatWindow extends Component {
                                 
                                message.sender_id===this.props.user.uid?  
                                 <div className="message  me" key={message.created_at}>
-                                   {message.message}
+                                   {message.message} <img src={this.findUserImage(message.sender_id)} /> 
                                 </div>
                                 :
                                 <div className="message " key={message.created_at}>

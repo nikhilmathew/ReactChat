@@ -1,7 +1,7 @@
 import { SIGNIN,SIGNOUT, SIGNINGIN, NEWUSER, REGISTER,REGISTERING } from '../actions/types'
 
 const initialState = {
-    user: {},
+    user: null,
     newUser:false
 }
 export default function(state = initialState,action) {

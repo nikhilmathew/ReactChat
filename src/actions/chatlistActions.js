@@ -66,7 +66,7 @@ export function fetchRooms(){
           );
         return fire.firestore().collection("users").doc(fire.auth().currentUser.uid)
         .onSnapshot(function(querySnapshot) {
-            console.log("fetching rooms", querySnapshot.data().chatrooms)
+            console.log("fetching rooms", querySnapshot,querySnapshot.data())
             var rooms = querySnapshot.data().chatrooms? querySnapshot.data().chatrooms:null
             console.log(rooms)
             if(rooms){
