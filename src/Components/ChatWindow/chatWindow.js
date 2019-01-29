@@ -53,7 +53,7 @@ class ChatWindow extends Component {
     }
     send(){
         document.getElementById("chat_text").focus();
-        console.log("sending message")
+        //console.log("sending message")
         let message = this.state.text.trim()
         if(message!=='')
             sendMessage(this.props.selectedRoom.id,this.state.text)

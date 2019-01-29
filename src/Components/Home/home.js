@@ -11,11 +11,11 @@ import ChatDetails from '../ChatDetails/chatdetails'
 class Home extends Component {
   constructor(props){
     super(props)
-    console.log(this.props)
+    //console.log(this.props)
     this.logout = this.logout.bind(this)
   }
   componentDidMount(){
-    console.log("home mounted",this.props.user)
+    //console.log("home mounted",this.props.user)
     setTimeout(()=>{
       this.props.fetchRooms()
       this.props.getInvites()
@@ -23,7 +23,7 @@ class Home extends Component {
     
   }
   componentDidUpdate(){
-    console.log("home updated")
+    //console.log("home updated")
     
       this.props.fetchRooms()
       this.props.getInvites()
@@ -32,7 +32,7 @@ class Home extends Component {
   }
   componentWillUnmount(){
     this.props.cleanStateOnleaveHome()
-    console.log('***************************************************************************')
+    //console.log('***************************************************************************')
   }
   render() {
     return (
@@ -62,7 +62,7 @@ class Home extends Component {
     );
   }
   logout(){
-    console.log("logout")
+    //console.log("logout")
     this.props.logout()
   }
 }

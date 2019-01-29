@@ -22,7 +22,7 @@ class SignIn extends Component {
     }
     onSubmit(e){
         e.preventDefault()
-        console.log("clicked sign in ")
+        //console.log("clicked sign in ")
         this.props.login(this.state.email,this.state.password)
 
     }

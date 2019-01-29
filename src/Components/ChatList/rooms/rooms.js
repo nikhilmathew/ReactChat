@@ -12,7 +12,7 @@ class Rooms extends Component {
         this.selectChatroom = this.selectChatroom.bind(this)
     }
     selectChatroom(e){
-        console.log(e.target.id)
+        //console.log(e.target.id)
         this.props.fetchMessages(e.target.id,true)
         this.props.selectChatRoom(e.target.id)
         this.setState({
@@ -20,7 +20,7 @@ class Rooms extends Component {
         })
     }
     componentDidUpdate(){
-        console.log(this.props.rooms)
+        //console.log(this.props.rooms)
     }
   render() {
     return (

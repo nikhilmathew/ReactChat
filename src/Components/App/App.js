@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   componentWillMount(){
-    console.log("app mounted")
+    //console.log("app mounted")
     
   }
   authListener(){
@@ -23,11 +23,11 @@ class App extends Component {
       if (user) {
         // User is signed in.
         this.props.silentLogin(user)
-        console.log("auto signin user is signed in ",user)
+        //console.log("auto signin user is signed in ",user)
       } else {
         // No user is signed in.
         this.props.silentLogin(null)
-        console.log("no user signed in")
+        //console.log("no user signed in")
       }
     });  
   }

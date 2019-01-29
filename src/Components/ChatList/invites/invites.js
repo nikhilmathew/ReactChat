@@ -11,16 +11,16 @@ class Invites extends Component {
         this.rejectInvite = this.rejectInvite.bind(this)
     }
     acceptInvite(e){
-        console.log(e.target.id)
+        //console.log(e.target.id)
         acceptInvite(e.target.id)
         this.props.deleteInvite(e.target.id)
     }
     rejectInvite(e){
-        console.log(e.target.id)
+        //console.log(e.target.id)
         this.props.deleteInvite(e.target.id)
     }
     componentDidUpdate(){
-        console.log(this.props.rooms)
+        //console.log(this.props.rooms)
     }
   render() {
     return (

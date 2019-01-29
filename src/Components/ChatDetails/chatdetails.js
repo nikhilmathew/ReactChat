@@ -21,14 +21,14 @@ class ChatDetails extends Component {
       })
   }
   memberAdd(){
-      console.log("send email invite data to firestore")
+      //console.log("send email invite data to firestore")
       sendInvite(this.state.emailInvite,this.props.selectedRoom.id)
   }  
   kickUser(e){
     this.props.kickUserFromChat(this.props.selectedRoom.id,e.target.id)
   }
   deleteRoom(){
-    console.log("delete room")
+    //console.log("delete room")
     this.props.unselectChatRoom()
     deleteRoom(this.props.selectedRoom)
 

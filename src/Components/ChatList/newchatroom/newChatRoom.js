@@ -12,20 +12,20 @@ class NewChatRoom extends Component {
     }
   constructor(props){
     super(props)
-    console.log(this.props)
+    //console.log(this.props)
     this.showRoomInput = this.showRoomInput.bind(this)
     this.hideRoomInput = this.hideRoomInput.bind(this)
     this.createChatRoom = this.createChatRoom.bind(this)
     this.updateNewRoomName = this.updateNewRoomName.bind(this)
   }
   showRoomInput(){
-    console.log("new room creation started ")
+    //console.log("new room creation started ")
     this.setState({
         showInput:true
     })
   }
   hideRoomInput(){
-    console.log("new room creation cancelled ")
+    //console.log("new room creation cancelled ")
     this.setState({
         showInput:false,
         newRoomName:''

@@ -20,7 +20,7 @@ export function silentLogin(user){
 }
 export function login(email,password){
     return function(dispatch){
-        console.log("sign in method called")
+        //console.log("sign in method called")
         dispatch(
             {
                 type: SIGNINGIN,
@@ -29,7 +29,7 @@ export function login(email,password){
           );
         return fire.auth().signInWithEmailAndPassword(email,password)
         .then((result) => {
-            console.log(result)
+            //console.log(result)
           let { user } = result;
           dispatch(
             {
@@ -47,11 +47,11 @@ export function login(email,password){
     }
 }
 export function logout(){
-    console.log("logout called")
+    //console.log("logout called")
     return function(dispatch){
         return fire.auth().signOut()
         .then(res=>{
-            console.log("logout",res)
+            //console.log("logout",res)
             dispatch(
                 {
                     type:SIGNOUT,
@@ -64,7 +64,7 @@ export function logout(){
     
 }
 export function newUser(){
-    console.log("new user , show registration page")
+    //console.log("new user , show registration page")
     return function(dispatch){
         dispatch({
             type:NEWUSER,
@@ -91,21 +91,21 @@ export function registerUser(email,password,displayName,image){
 
         return fire.auth().createUserWithEmailAndPassword(email, password)
                 .then(result=>{
-                    console.log(result)
+                    //console.log(result)
                     let storageRef = fire.storage().ref(result.user.uid)
-                    console.log(storageRef)
+                    //console.log(storageRef)
                     storageRef.put(image)
                     .then((storres)=>{
-                        console.log(storres)
+                        //console.log(storres)
                         storageRef.getDownloadURL()
                         .then(downloadref=>{
-                            console.log(downloadref)
+                            //console.log(downloadref)
                                 result.user.updateProfile({
                                 displayName: displayName,
                                 photoURL: downloadref
                                 }).then(()=> {
                                 // Update successful.
-                                console.log("user name and pic updated",result,result.user)
+                                //console.log("user name and pic updated",result,result.user)
                                 let { displayName, photoURL, email,uid }= fire.auth().currentUser
                                 fire.firestore().collection('users').doc(uid).set({
                                     name:displayName,
@@ -116,10 +116,10 @@ export function registerUser(email,password,displayName,image){
                                     chatrooms:[]
                                 })
                                 .then(result=>{
-                                    console.log(" new user added to DB",result)
+                                    //console.log(" new user added to DB",result)
                                 })
                                 .catch(err=>{
-                                    console.log("error adding new user to firestore",err)
+                                    //console.log("error adding new user to firestore",err)
                                 })
                                     dispatch({
                                         type:REGISTER,
@@ -132,14 +132,14 @@ export function registerUser(email,password,displayName,image){
                         
                     })
                     .catch(err=>{
-                        console.log(err)
+                        //console.log(err)
                     })
                     
                     
                 })
                 .catch(function(error) {
                     // Handle Errors here.
-                    console.log("registration errors ",error)
+                    //console.log("registration errors ",error)
                     // ...
                 });
     }

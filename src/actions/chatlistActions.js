@@ -26,7 +26,7 @@ export function unselectChatRoom(){
     }
 }
 export function fetchMessages(room_id,mode){
-        console.log('fetch messages activated')
+        //console.log('fetch messages activated')
         // if(mode){
         //     if(typeof message_listener =='function')
         //         message_listener()
@@ -49,23 +49,23 @@ export function fetchMessages(room_id,mode){
                     }
                     messages.push(message)
                     // doc.data() is never undefined for query doc snapshots
-                    console.log(doc.id, " => ", doc.data());
+                    //console.log(doc.id, " => ", doc.data());
                 });
-                console.log("messages",querySnapshot)
+                //console.log("messages",querySnapshot)
                 dispatch({
                     type:UPDATE_MESSAGES,
                     payload:messages
                 })
             },
             err=>{
-                console.warn(err)
+                //console.warn(err)
             })
         }
         
 }
 export function fetchRooms(){
     return function(dispatch){
-        console.log("fetch rooms method called")
+        //console.log("fetch rooms method called")
         dispatch(
             {
                 type: FETCHING_ROOMS,
@@ -74,19 +74,19 @@ export function fetchRooms(){
           );
         return fire.firestore().collection("users").doc(fire.auth().currentUser.uid)
         .onSnapshot(function(querySnapshot) {
-            console.log("fetching rooms", querySnapshot,querySnapshot.data())
+            //console.log("fetching rooms", querySnapshot,querySnapshot.data())
             var rooms = querySnapshot.data().chatrooms? querySnapshot.data().chatrooms:null
-            console.log(rooms)
+            //console.log(rooms)
             if(rooms){
                 let chat_rooms = []
                 let promises = []
                 rooms.forEach((doc) =>{
-                    console.log(doc)
+                    //console.log(doc)
                     promises.push(
                     new Promise((fulfill,reject)=>{
                             fire.firestore().collection("chatrooms").doc(doc).get()
                             .then(room=>{
-                                console.warn("inside loop",room.data())
+                                //console.warn("inside loop",room.data())
                                 // chat_rooms.push(room.data())
                                 fulfill(room.data())
                             })
@@ -95,7 +95,7 @@ export function fetchRooms(){
                 });
                 Promise.all(promises)
                 .then((result)=>{
-                    console.log(result)
+                    //console.log(result)
                     dispatch({
                         type:UPDATE_ROOMS,
                         payload:result
@@ -104,12 +104,12 @@ export function fetchRooms(){
                         
                     // });
                 })
-                console.log("outside loop")
+                //console.log("outside loop")
                 dispatch({
                     type:UPDATE_ROOMS,
                     payload:chat_rooms
                 })
-                console.warn(chat_rooms)
+                //console.warn(chat_rooms)
             }else{
                 dispatch({
                     type:UPDATE_ROOMS,
@@ -117,7 +117,7 @@ export function fetchRooms(){
                 })
             }
             
-            // console.log("Current cities in CA: ", cities.join(", "));
+            // //console.log("Current cities in CA: ", cities.join(", "));
         });
     }
 }
@@ -132,16 +132,16 @@ export function getInvites(){
           return fire.firestore().collection("invites").doc(fire.auth().currentUser.email)
           .onSnapshot(function(querySnapshot) {
             if(querySnapshot.data()!=null){
-                console.log("fetching invites", querySnapshot.data(), querySnapshot.data()==null)
+                //console.log("fetching invites", querySnapshot.data(), querySnapshot.data()==null)
                 var irooms = querySnapshot.data().rooms? querySnapshot.data().rooms:null
-                console.log(irooms)
+                //console.log(irooms)
                 if(irooms){
                     let full_invite_details = []
                     irooms.forEach(async (doc) =>{
-                        console.log(doc)
+                        //console.log(doc)
                         await fire.firestore().collection("chatrooms").doc(doc).get()
                         .then(room=>{
-                            console.warn(room.data())
+                            //console.warn(room.data())
                             full_invite_details.push(room.data())
                             dispatch({
                                 type:GET_INVITES,
@@ -149,7 +149,7 @@ export function getInvites(){
                             })
                         })
                     });
-                    console.warn(full_invite_details)
+                    //console.warn(full_invite_details)
                 }else{
                     dispatch({
                         type:GET_INVITES,
@@ -163,7 +163,7 @@ export function getInvites(){
                 })
             }
               
-              // console.log("Current cities in CA: ", cities.join(", "));
+              // //console.log("Current cities in CA: ", cities.join(", "));
           });   
     }
 }

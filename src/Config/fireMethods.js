@@ -3,7 +3,7 @@ import * as firebase from 'firebase';
 import { getInvites } from '../actions/chatlistActions';
 
 export function addUserToFireDBOnRegistration(){
-    console.log("sending data to firestore")
+    //console.log("sending data to firestore")
     return new Promise((fulfill,reject)=>{
         let { displayName, photoURL, email,uid }= fire.auth().currentUser
         fire.firestore().collection('users').doc(email).set({
@@ -14,11 +14,11 @@ export function addUserToFireDBOnRegistration(){
             created_at: Date.now()
         })
         .then(result=>{
-            console.log(" new user added to DB",result)
+            //console.log(" new user added to DB",result)
             fulfill()
         })
         .catch(err=>{
-            console.log("error adding new user to firestore",err)
+            //console.log("error adding new user to firestore",err)
             reject()
         })
     })
@@ -31,7 +31,7 @@ export function createChatRoom(name){
         created_at:new Date()
     })
     .then(res=>{
-        console.log(res)
+        //console.log(res)
         let chatroomid = res.id
         let user  = fire.auth().currentUser
         fire.firestore().collection('users').doc(user.uid).update({
@@ -74,11 +74,11 @@ export function acceptInvite(chatroomid){
         })
 }
 export function deleteUser(room_id,user_id){
-    console.log("user deletion reeived",room_id,user_id)
+    //console.log("user deletion reeived",room_id,user_id)
     fire.firestore().collection('chatrooms').doc(room_id).get()
     .then(result=>{
         let rdata =result.data()
-        console.log(rdata.members)
+        //console.log(rdata.members)
         fire.firestore().collection('chatrooms').doc(room_id).update({
             members: rdata.members.filter(member => member.id !== user_id)
         })
@@ -97,7 +97,7 @@ export function sendMessage(room_id,message){
     })
 }
 export function deleteRoom(roomobj){
-    console.log(roomobj)
+    //console.log(roomobj)
     roomobj.members.forEach(element => {
         fire.firestore().collection('users').doc(element.id).update({
             chatrooms:firebase.firestore.FieldValue.arrayRemove(roomobj.id)

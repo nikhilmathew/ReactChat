@@ -41,8 +41,8 @@ class SignUp extends Component {
     }
     onSubmit(e){
         e.preventDefault()
-        console.log(this.state)
-        console.log("clicked sign in ")
+        //console.log(this.state)
+        //console.log("clicked sign in ")
         this.props.registerUser(this.state.email,this.state.password,this.state.name,this.state.selectedFile)
 
     }
