@@ -14,10 +14,20 @@ class Home extends Component {
     console.log(this.props)
     this.logout = this.logout.bind(this)
   }
-  componentDidUpdate(){
-    console.log("home updated")
+  componentDidMount(){
+    // console.log("home mounted")
+    setTimeout(()=>{
     this.props.fetchRooms()
     this.props.getInvites()
+  },2000)
+  }
+  componentDidUpdate(){
+    console.log("home updated")
+    
+      this.props.fetchRooms()
+      this.props.getInvites()
+    
+    
   }
   componentWillUnmount(){
     this.props.cleanStateOnleaveHome()

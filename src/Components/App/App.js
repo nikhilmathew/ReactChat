@@ -8,14 +8,14 @@ import './App.css';
 import Home from '../Home/home'
 import AuthPages from '../AuthenticationPages/authPages';
 class App extends Component {
-  // constructor(props){
-  //   super(props)
-   
-  // }
+  constructor(props){
+    super(props)
+   this.authListener()
+  }
 
   componentWillMount(){
     console.log("app mounted")
-    this.authListener()
+    
   }
   authListener(){
     // console.log(fire)

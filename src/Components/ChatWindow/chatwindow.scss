@@ -1,0 +1,38 @@
+.sub_container{
+    border:1px solid blue;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    .row{
+        // width:100%;
+    }
+    .room_title{
+        display:block;
+        text-align: center;
+        height:50px;
+        border:1px solid pink
+    }
+    .message_top_level_container{
+        overflow-y: scroll;
+    }
+    .message_container{
+        width: 100%;
+        height:100%;
+        // border: 1px solid green;
+        display: flex;
+        flex-direction: column-reverse;
+        
+        .message{
+            place-self:flex-start;
+            border-radius: 0px 10px 10px 10px;
+            border: 1px solid green;
+            padding: 4px;
+            margin: 5px;
+        }
+        .me{
+            place-self:flex-end!important;
+            border-radius: 10px 10px 0px 10px;
+            border: 1px solid orange;
+        }
+    }
+}
