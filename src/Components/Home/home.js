@@ -15,11 +15,18 @@ class Home extends Component {
     this.logout = this.logout.bind(this)
   }
   componentDidMount(){
-    // console.log("home mounted")
+    console.log("home mounted")
     setTimeout(()=>{
+      this.props.fetchRooms()
+      this.props.getInvites()
+    },2000)
+    
+  }
+  componentDidUpdate(){
+    console.log("home updated")
     this.props.fetchRooms()
     this.props.getInvites()
-  },2000)
+  
   }
   componentDidUpdate(){
     console.log("home updated")

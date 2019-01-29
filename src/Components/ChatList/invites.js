@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { selectChatRoom, deleteInvite } from '../../actions/chatlistActions'
 import { acceptInvite } from '../../Config/fireMethods'
-import  './rooms.scss'
+import  './invites.scss'
 class Invites extends Component {
     constructor(props){
         super(props)
@@ -24,16 +24,24 @@ class Invites extends Component {
     }
   render() {
     return (
-        <div className="row ">
+        <div className="row invites_box">
         <p>Pending Invites</p>
             <div className="col-12">
                 <div className="row joined_rooms_container">
                     <div className="col-12">
                         {this.props.irooms!=null?this.props.irooms.map(room =>(
-                             <div className="row room" key={room.created_at}>
-                                You have an invite to room '{room.roomName}' from '{room.ownerName}'
-                                <button className="accept_room" id={room.id}  onClick={this.acceptInvite}>Accept</button>
-                                <button className="reject_invite" id={room.id}  onClick={this.rejectInvite}>Reject</button>
+                             <div className="row invite_room" key={room.created_at}>
+                                <div className="col-9">
+                                    You have an invite to room '{room.roomName}' from '{room.ownerName}'
+                                </div>
+                                <div className="col-3">
+                                    <div className="row">
+                                        <button className="accept_invite" id={room.id}  onClick={this.acceptInvite}>Accept</button>
+                                    </div>
+                                    <div className="row">
+                                        <button className="reject_invite" id={room.id}  onClick={this.rejectInvite}>Reject</button>
+                                    </div>
+                                </div>                                
                             </div>
                         )
                         ):null

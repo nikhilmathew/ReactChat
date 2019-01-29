@@ -71,18 +71,36 @@ export function fetchRooms(){
             console.log(rooms)
             if(rooms){
                 let chat_rooms = []
-                rooms.forEach(async (doc) =>{
+                let promises = []
+                rooms.forEach((doc) =>{
                     console.log(doc)
-                    await fire.firestore().collection("chatrooms").doc(doc).get()
-                    .then(room=>{
-                        console.warn(room.data())
-                        chat_rooms.push(room.data())
-                        dispatch({
-                            type:UPDATE_ROOMS,
-                            payload:room.data()
-                        })
+                    promises.push(
+                    new Promise((fulfill,reject)=>{
+                            fire.firestore().collection("chatrooms").doc(doc).get()
+                            .then(room=>{
+                                console.warn("inside loop",room.data())
+                                // chat_rooms.push(room.data())
+                                fulfill(room.data())
+                            })
                     })
+                    )
                 });
+                Promise.all(promises)
+                .then((result)=>{
+                    console.log(result)
+                    dispatch({
+                        type:UPDATE_ROOMS,
+                        payload:result
+                    })
+                    // result.forEach(element => {
+                        
+                    // });
+                })
+                console.log("outside loop")
+                dispatch({
+                    type:UPDATE_ROOMS,
+                    payload:chat_rooms
+                })
                 console.warn(chat_rooms)
             }else{
                 dispatch({

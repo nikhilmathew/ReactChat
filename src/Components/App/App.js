@@ -23,7 +23,7 @@ class App extends Component {
       if (user) {
         // User is signed in.
         this.props.silentLogin(user)
-        console.log("user is signed in ",user)
+        console.log("auto signin user is signed in ",user)
       } else {
         // No user is signed in.
         this.props.silentLogin(null)

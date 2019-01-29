@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import { selectChatRoom,fetchMessages } from '../../actions/chatlistActions'
 import  './rooms.scss'
 class Rooms extends Component {
+    state={
+        selected:null
+    }
     constructor(props){
         super(props)
         this.selectChatroom = this.selectChatroom.bind(this)
@@ -12,21 +15,28 @@ class Rooms extends Component {
         console.log(e.target.id)
         this.props.fetchMessages(e.target.id,true)
         this.props.selectChatRoom(e.target.id)
+        this.setState({
+            selected:e.target.id
+        })
     }
     componentDidUpdate(){
         console.log(this.props.rooms)
     }
   render() {
     return (
-        <div className="row ">
+        <div className="row room_list_joined">
         <p>Joined Chat Rooms</p>
             <div className="col-12">
                 <div className="row joined_rooms_container">
                     <div className="col-12">
                         {this.props.rooms!=null?this.props.rooms.map(room =>(
-                             <div className="row room" key={room.created_at}>
-                                {room.roomName}
-                                <button className="select_room"  id={room.id} onClick={this.selectChatroom}>OPen</button>
+                             <div className={`row room  ${this.state.selected===room.id?"selected_room":''}`} key={room.created_at}>
+                                <div className="col-9">
+                                    {room.roomName}
+                                </div>
+                                <div className="col-3">
+                                    <button className='select_room '  id={room.id} onClick={this.selectChatroom}>{this.state.selected===room.id?"Active->":'Enter'}</button>
+                                </div>
                             </div>
                         )
                         ):null
