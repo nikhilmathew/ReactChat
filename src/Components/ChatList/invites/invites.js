@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { selectChatRoom, deleteInvite } from '../../actions/chatlistActions'
-import { acceptInvite } from '../../Config/fireMethods'
+import { selectChatRoom, deleteInvite } from '../../../actions/chatlistActions'
+import { acceptInvite } from '../../../Config/fireMethods'
 import  './invites.scss'
 class Invites extends Component {
     constructor(props){
@@ -29,7 +29,7 @@ class Invites extends Component {
             <div className="col-12">
                 <div className="row joined_rooms_container">
                     <div className="col-12">
-                        {this.props.irooms!=null?this.props.irooms.map(room =>(
+                        {this.props.irooms!=null?this.props.irooms.length>0?this.props.irooms.map(room =>(
                              <div className="row invite_room" key={room.created_at}>
                                 <div className="col-9">
                                     You have an invite to room '{room.roomName}' from '{room.ownerName}'
@@ -44,7 +44,7 @@ class Invites extends Component {
                                 </div>                                
                             </div>
                         )
-                        ):null
+                        ):<p>No Invites!</p>:<p> No Invites!</p>
                         }
                     </div>
                 

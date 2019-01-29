@@ -1,13 +1,21 @@
-import { SIGNIN, SIGNOUT, SIGNINGIN, NEWUSER, REGISTERING, REGISTER } from './types'
+import { SIGNIN, SIGNOUT, SIGNINGIN, NEWUSER, REGISTERING, REGISTER, SIGNINFAILED,OLDUSER } from './types'
 import fire from '../Config/fire'
 // import { addUserToFireDBOnRegistration } from '../Config/fireMethods'
 
 export function silentLogin(user){
     return function(dispatch){
-        dispatch({
-            type:SIGNIN,
-            payload:user
-        })
+        if(user==null){
+            dispatch({
+                type:SIGNOUT,
+                payload:null
+            })
+        }else{
+            dispatch({
+                type:SIGNIN,
+                payload:user
+            }) 
+        }
+        
     }
 }
 export function login(email,password){
@@ -32,8 +40,8 @@ export function login(email,password){
         })
         .catch((error) => {
           dispatch({
-            type: SIGNOUT,
-            payload: null
+            type: SIGNINFAILED,
+            payload: error
         })
         });
     }
@@ -60,6 +68,14 @@ export function newUser(){
     return function(dispatch){
         dispatch({
             type:NEWUSER,
+            payload:null
+        })
+    }
+}
+export function oldUser(){
+    return function(dispatch){
+        dispatch({
+            type:OLDUSER,
             payload:null
         })
     }

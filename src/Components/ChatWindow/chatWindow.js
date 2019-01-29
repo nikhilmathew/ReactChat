@@ -82,12 +82,12 @@ class ChatWindow extends Component {
                     {this.props.messages!=null?this.props.messages.map(message =>(
                                 
                                message.sender_id===this.props.user.uid?  
-                                <div className="message  me" key={message.created_at}>
-                                   {message.message} <img src={this.findUserImage(message.sender_id)} /> 
+                                <div className="message  me" key={message.id}>
+                                   {message.message} <img src={this.findUserImage(message.sender_id)} alt=""/> 
                                 </div>
                                 :
                                 <div className="message " key={message.created_at}>
-                                   <span >other : </span>{message.message}
+                                   <img src={this.findUserImage(message.sender_id)} alt=""/><span >{message.sender} : </span>{message.message}
                                 </div>
                               
                             )

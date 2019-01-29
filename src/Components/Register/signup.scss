@@ -1,0 +1,91 @@
+.signin_container{
+    // border:1px solid red;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-color:#ddd;
+    .signindiv{
+        // border:1px solid orange;
+    //     background:
+    //     radial-gradient(circle at 0% 50%, rgba(96, 16, 48, 0) 9px, grey 10px, rgba(96, 16, 48, 0) 11px) 0px 10px,
+    //     radial-gradient(at 100% 100%,      rgba(96, 16, 48, 0) 9px, grey 10px, rgba(96, 16, 48, 0) 11px),
+    //    rgba(144, 238, 144, 0.5);
+    //     background-size: 20px 20px;
+    //     background-size: 15px 30px;
+        width:40%;
+        height:50%;
+        .failed_status{
+            color:red;
+            font-size: 15px;
+            font-weight:400;
+            text-shadow: none;
+            -webkit-text-stroke:0px red;
+        }
+        p{
+            // font-family: 'Roboto';
+            font-weight:700;
+            color: darkorange; /* Old browsers */
+            font-size:30px;
+            -webkit-text-stroke: 1px black;
+            color: white;
+            text-shadow:
+                3px 3px 0 #000,
+                -1px -1px 0 #000,  
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+        .box{
+            // border:1px solid orange;
+            margin:10px;
+            label{
+                // text-shadow:
+                // 3px 3px 0 #fff,
+                // -1px -1px 0 #fff,  
+                // 1px -1px 0 #fff,
+                // -1px 1px 0 #fff,
+                // 1px 1px 0 #fff;
+            }
+            input{
+                border:none;
+                background-color: transparent;
+                border-bottom:2px solid orange;
+                max-width:220px;
+                
+            }
+            input:valid{
+                    border-color: green
+                }
+            input:invalid{
+                    border-color: red;
+                }
+        }
+        button{
+            height:50px;
+            width:100px;
+            border:none;
+            font-size:24px;
+            border:1px solid black;
+            border-radius: 10px;
+            background-color:darkorange;
+        }
+        .new_user{
+            margin-top:30px;
+            font-size:20px;
+            button{
+                font-size:20px;
+                height:40px;
+                width:100px;
+            }
+        }
+        .backtologin{
+            width:120px;
+            height:30px;
+            font-size:14px;
+            margin:20px;
+            background-color: grey;
+
+        }
+    }
+}

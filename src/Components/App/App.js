@@ -34,7 +34,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {  this.props.user==null?<AuthPages/>:<Home/>}
+        {  this.props.loggedin?<Home/>:<AuthPages/>}
       </div>
     );
   }
@@ -45,7 +45,7 @@ App.propTypes ={
 }
 function mapStateToProps (state){
   return {
-    user: state.auth.user
+    loggedin: state.auth.loggedin
   }
 }
 export default  connect(mapStateToProps, { silentLogin })(App)

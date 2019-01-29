@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { selectChatRoom,fetchMessages } from '../../actions/chatlistActions'
+import { selectChatRoom,fetchMessages } from '../../../actions/chatlistActions'
 import  './rooms.scss'
 class Rooms extends Component {
     state={
@@ -29,7 +29,7 @@ class Rooms extends Component {
             <div className="col-12">
                 <div className="row joined_rooms_container">
                     <div className="col-12">
-                        {this.props.rooms!=null?this.props.rooms.map(room =>(
+                        {this.props.rooms!=null?this.props.rooms.length>0?this.props.rooms.map(room =>(
                              <div className={`row room  ${this.state.selected===room.id?"selected_room":''}`} key={room.created_at}>
                                 <div className="col-8">
                                     {room.roomName}
@@ -39,7 +39,7 @@ class Rooms extends Component {
                                 </div>
                             </div>
                         )
-                        ):null
+                        ):<p>No Joined Rooms</p>:<p>No rooms</p>
                         }
                     </div>
                 

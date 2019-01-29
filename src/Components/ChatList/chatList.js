@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 // import PropTypes from 'prop-types'
 import  './chatlist.scss'
-import NewChatRoom from './newChatRoom';
-import Invites from './invites'
-import Rooms from './rooms';
+import NewChatRoom from './newchatroom/newChatRoom';
+import Invites from './invites/invites'
+import Rooms from './rooms/rooms';
 class ChatList extends Component {
   render() {
     return (

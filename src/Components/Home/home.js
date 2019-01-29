@@ -39,7 +39,7 @@ class Home extends Component {
       <div className="container-fluid">
        <div className="row" >
           <div className="title_bar_container">
-          <img className="profilepic" src={this.props.user.photoURL}/>
+          <img className="profilepic" src={this.props.user.photoURL} alt="profile"/>
             <div className="title">
               <p>Welcome to Nik CHat ,  {this.props.user.displayName}  </p>
             </div>

@@ -1,5 +1,5 @@
-import { UPDATE_ROOMS, FETCHING_ROOMS,SELECT_CHAT_ROOM, GET_INVITES,FETCHING_INVITES, DELETE_INVITE,CLEAN_CHAT_REDUCER, UPDATE_MESSAGES } from '../actions/types'
-import { fetchMessages } from '../actions/chatlistActions'
+import { UPDATE_ROOMS, FETCHING_ROOMS,SELECT_CHAT_ROOM, GET_INVITES,FETCHING_INVITES, DELETE_INVITE,CLEAN_CHAT_REDUCER, UPDATE_MESSAGES, UNSELECT_CHAT_ROOM } from '../actions/types'
+// import { fetchMessages } from '../actions/chatlistActions'
 const initialState = {
     
     chatRooms : [],
@@ -29,22 +29,28 @@ export default function(state = initialState,action) {
                     ...state,
                     chatRooms:action.payload//[...state.chatRooms, action.payload]
                 } 
+        case UNSELECT_CHAT_ROOM:
+                return {
+                    ...state,
+                    currentlySelectedRoom:null,
+                    messageCache:null
+                }
         case SELECT_CHAT_ROOM:
-                if(state.currentlySelectedRoom!==null){
-                    // fetchMessages(action.payload,false)
-                    return {
-                        ...state,
-                        currentlySelectedRoom:state.chatRooms.find(room => room.id ===action.payload),
-                        messageCache:null
-                    }
-                }else{
+                // if(state.currentlySelectedRoom!==null){
+                //     // fetchMessages(action.payload,false)
+                //     return {
+                //         ...state,
+                //         currentlySelectedRoom:state.chatRooms.find(room => room.id ===action.payload),
+                //         messageCache:null
+                //     }
+                // }else{
                     // fetchMessages(action.payload,true)
                     return {
                         ...state,
                         currentlySelectedRoom:state.chatRooms.find(room => room.id ===action.payload),
                         messageCache:null
                     }
-                }
+                // }
         case UPDATE_MESSAGES:
                 return{
                     ...state,

@@ -124,6 +124,9 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            img{
+                width:25px;
+            }
         }
         .remove_member{
             height:25px;

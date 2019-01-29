@@ -1,7 +1,6 @@
-import { FETCHING_ROOMS,UPDATE_ROOMS, SELECT_CHAT_ROOM, FETCHING_INVITES, GET_INVITES, DELETE_INVITE,CLEAN_CHAT_REDUCER, DELETE_USER,UPDATE_MESSAGES } from './types'
+import { FETCHING_ROOMS,UPDATE_ROOMS, SELECT_CHAT_ROOM, FETCHING_INVITES, GET_INVITES, DELETE_INVITE,CLEAN_CHAT_REDUCER, DELETE_USER,UPDATE_MESSAGES, UNSELECT_CHAT_ROOM } from './types'
 import fire from '../Config/fire'
 import { rejectInvite, deleteUser } from '../Config/fireMethods'
-var message_listener =null
 export function cleanStateOnleaveHome(){
     return function(dispatch){
         dispatch({
@@ -18,6 +17,14 @@ export function selectChatRoom(room){
         })
     }
 }
+export function unselectChatRoom(){
+    return function(dispatch){
+        dispatch({
+            type:UNSELECT_CHAT_ROOM,
+            payload:null
+        })
+    }
+}
 export function fetchMessages(room_id,mode){
         console.log('fetch messages activated')
         // if(mode){
@@ -29,11 +36,12 @@ export function fetchMessages(room_id,mode){
                 type:UPDATE_MESSAGES,
                 payload:null
             })
-            return fire.firestore().collection('chatrooms').doc(room_id).collection('messages').orderBy('created_at',"desc").limit(20)
+            return fire.firestore().collection('chatrooms').doc(room_id).collection('messages').orderBy('created_at',"desc").limit(10)
             .onSnapshot(function (querySnapshot){
                 let messages =[]
                 querySnapshot.forEach(function(doc) {
                     let message ={
+                        id:doc.id,
                         message:doc.data().message,
                         sender:doc.data().sender,
                         sender_id:doc.data().sender_id,

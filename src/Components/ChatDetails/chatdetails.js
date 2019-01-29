@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { sendInvite, deleteRoom } from '../../Config/fireMethods'
-import { kickUserFromChat } from '../../actions/chatlistActions'
+import { kickUserFromChat, unselectChatRoom } from '../../actions/chatlistActions'
 import PropTypes from 'prop-types'
 import './chatdetails.scss'
 class ChatDetails extends Component {
@@ -29,7 +29,9 @@ class ChatDetails extends Component {
   }
   deleteRoom(){
     console.log("delete room")
+    this.props.unselectChatRoom()
     deleteRoom(this.props.selectedRoom)
+
   }
   render() {
     return (
@@ -57,18 +59,19 @@ class ChatDetails extends Component {
                 <div className="row add_user_to_room">
                     <p> Add a user to chatroom: </p>
                     <div className="newuser_email" >
-                        <input type="email" name="email" className="invite_email_name" onChange={this.emailChange} value={this.state.emailInvite}/>
+                        <input type="email" name="email" className="invite_email_name" placeholder="enter email of invitee" onChange={this.emailChange} value={this.state.emailInvite}/>
                         <button className="invite_send" onClick={this.memberAdd}>Send Invite </button> 
                     </div>
                 </div>
                 :''}
                 <div className="row">
                     <div className="col-12 members_containers">
-                        {
+                        <p>Members of chat</p>
+                        {   
                             [...this.props.selectedRoom.members].map((element, i) =>
                                 <div className="row member_item" key={element.id}>
                                     <div className="col-7">
-                                        <p className="member_name">{ element.name}</p>
+                                        <p className="member_name"><img src={element.photoURL} alt="" />{ element.name}</p>
                                     </div>
                                     <div className="col-5">
                                         {element.id===this.props.selectedRoom.owner? 'OWNER':this.props.user.uid===this.props.selectedRoom.owner? <button id={element.id} className="remove_member" onClick={this.kickUser} >Kick</button>:''}
@@ -87,7 +90,8 @@ class ChatDetails extends Component {
   
 }
 ChatDetails.propTypes ={
-    kickUserFromChat:PropTypes.func.isRequired
+    kickUserFromChat:PropTypes.func.isRequired,
+    unselectChatRoom:PropTypes.func.isRequired
 }
 function mapStateToProps (state){
   return {
@@ -96,4 +100,4 @@ function mapStateToProps (state){
       user: state.auth.user
   }
 }
-export default connect(mapStateToProps, { kickUserFromChat })(ChatDetails)
+export default connect(mapStateToProps, { kickUserFromChat,unselectChatRoom })(ChatDetails)

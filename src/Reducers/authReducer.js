@@ -1,28 +1,45 @@
-import { SIGNIN,SIGNOUT, SIGNINGIN, NEWUSER, REGISTER,REGISTERING } from '../actions/types'
+import { SIGNIN,SIGNOUT, SIGNINGIN, NEWUSER, REGISTER,REGISTERING, SIGNINFAILED, OLDUSER } from '../actions/types'
 
 const initialState = {
-    user: null,
-    newUser:false
+    loggedin:false,
+    user: {},
+    newUser:false,
+    failed:null
 }
 export default function(state = initialState,action) {
     switch (action.type){
         case SIGNIN:
             return {
                 ...state,
+                loggedin:true,
                 user:action.payload,
-                newUser:false
+                newUser:false,
+                failed:null
             }
         case SIGNOUT:
             return {
+                ...state,
                 newUser:false,
-                user:null
+                user:null,
+                loggedin:false
+            }
+        case OLDUSER:
+            return {
+                ...state,
+                newUser:false
             }
         case SIGNINGIN:
             return{
                 ...state,
                 user:null,
+                failed:null
 
             }  
+        case SIGNINFAILED:
+            return {
+                ...state,
+                failed:action.payload
+            }
         case NEWUSER:
             return {
                 ...state,
@@ -31,7 +48,8 @@ export default function(state = initialState,action) {
         case REGISTER:
             return {
                 ...state,
-                user:action.payload
+                user:action.payload,
+                loggedin:true
             }
         case REGISTERING:
             return {
